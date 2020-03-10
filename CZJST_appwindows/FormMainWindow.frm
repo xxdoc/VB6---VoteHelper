@@ -820,81 +820,78 @@ Begin VB.Form FormMainWindow
       Top             =   6720
       Width           =   120
    End
-   Begin VB.Menu MenuCtrl 
-      Caption         =   "Controls"
-      Begin VB.Menu MenuCtrlTotalQuan 
+   Begin VB.Menu MenuVote 
+      Caption         =   "Vote"
+      Begin VB.Menu MenuVoteTotalQuan 
          Caption         =   "¡ù¡¡Quantity: 50"
          Shortcut        =   {F6}
       End
-      Begin VB.Menu MenuCtrl1_ 
+      Begin VB.Menu MenuVote1_ 
          Caption         =   "-"
       End
-      Begin VB.Menu MenuCtrlStart 
+      Begin VB.Menu MenuVoteStart 
          Caption         =   "¡ð¡¡Start"
          Shortcut        =   {F5}
       End
-      Begin VB.Menu MenuCtrlClear 
+      Begin VB.Menu MenuVoteClear 
          Caption         =   "£ª¡¡Clear Statistics"
          Shortcut        =   {F7}
       End
-      Begin VB.Menu MenuCtrl2_ 
+      Begin VB.Menu MenuVote2_ 
          Caption         =   "-"
       End
-      Begin VB.Menu MenuCtrlVote1 
-         Caption         =   "¢Ù¡¡Vote 1"
+      Begin VB.Menu MenuVoteVoteCand1 
+         Caption         =   "¢Ù¡¡Vote for Candidate 1"
          Enabled         =   0   'False
          Shortcut        =   ^{F1}
       End
-      Begin VB.Menu MenuCtrlVote2 
-         Caption         =   "¢Ú¡¡Vote 2"
+      Begin VB.Menu MenuVoteVoteCand2 
+         Caption         =   "¢Ú¡¡Vote for Candidate 2"
          Enabled         =   0   'False
          Shortcut        =   ^{F2}
       End
-      Begin VB.Menu MenuCtrlVote3 
-         Caption         =   "¢Û¡¡Vote 3"
+      Begin VB.Menu MenuVoteVoteCand3 
+         Caption         =   "¢Û¡¡Vote for Candidate 3"
          Enabled         =   0   'False
          Shortcut        =   ^{F3}
       End
-      Begin VB.Menu MenuCtrlVote4 
-         Caption         =   "¢Ü¡¡Vote 4"
+      Begin VB.Menu MenuVoteVoteCand4 
+         Caption         =   "¢Ü¡¡Vote for Candidate 4"
          Enabled         =   0   'False
          Shortcut        =   ^{F4}
       End
-      Begin VB.Menu MenuCtrlVote5 
-         Caption         =   "¢Ý¡¡Vote 5"
+      Begin VB.Menu MenuVoteVoteCand5 
+         Caption         =   "¢Ý¡¡Vote for Candidate 5"
          Enabled         =   0   'False
          Shortcut        =   ^{F5}
       End
-      Begin VB.Menu MenuCtrlVote6 
-         Caption         =   "¢Þ¡¡Vote 6"
+      Begin VB.Menu MenuVoteVoteCand6 
+         Caption         =   "¢Þ¡¡Vote for Candidate 6"
          Enabled         =   0   'False
          Shortcut        =   ^{F6}
-      End
-      Begin VB.Menu MenuCtrl3_ 
-         Caption         =   "-"
-      End
-      Begin VB.Menu MenuCtrl4_ 
-         Caption         =   "-"
-      End
-      Begin VB.Menu MenuCtrlAbout 
-         Caption         =   "About..."
-         Shortcut        =   {F1}
-      End
-      Begin VB.Menu MenuCtrl5_ 
-         Caption         =   "-"
-      End
-      Begin VB.Menu MenuCtrlEXIT 
-         Caption         =   "EXIT"
-         Shortcut        =   {F4}
       End
    End
    Begin VB.Menu Menu1_ 
       Caption         =   "¡¡|¡¡"
       Enabled         =   0   'False
    End
+   Begin VB.Menu MenuAbout 
+      Caption         =   "About..."
+   End
+   Begin VB.Menu Menu2_ 
+      Caption         =   "¡¡|¡¡"
+      Enabled         =   0   'False
+   End
    Begin VB.Menu MenuLanguage 
       Caption         =   "£Á×Ö¤¢"
       Enabled         =   0   'False
+   End
+   Begin VB.Menu Menu3_ 
+      Caption         =   "¡¡|¡¡"
+      Enabled         =   0   'False
+   End
+   Begin VB.Menu MenuEXIT 
+      Caption         =   "EXIT"
    End
 End
 Attribute VB_Name = "FormMainWindow"
@@ -976,15 +973,15 @@ Public answer
         maxquan = 0
         blinkorder = 1
 
-        MenuCtrlStart.Enabled = True
-        MenuCtrlTotalQuan.Enabled = True
-        MenuCtrlVote1.Enabled = False
-        MenuCtrlVote2.Enabled = False
-        MenuCtrlVote3.Enabled = False
-        MenuCtrlVote4.Enabled = False
-        MenuCtrlVote5.Enabled = False
-        MenuCtrlVote6.Enabled = False
-        MenuCtrlClear.Enabled = True
+        MenuVoteStart.Enabled = True
+        MenuVoteTotalQuan.Enabled = True
+        MenuVoteVoteCand1.Enabled = False
+        MenuVoteVoteCand2.Enabled = False
+        MenuVoteVoteCand3.Enabled = False
+        MenuVoteVoteCand4.Enabled = False
+        MenuVoteVoteCand5.Enabled = False
+        MenuVoteVoteCand6.Enabled = False
+        MenuVoteClear.Enabled = True
         CmdTotalQuan.Enabled = True
         TextCommand.Enabled = False
         TextCommand.BackColor = &HAA7700
@@ -993,7 +990,7 @@ Public answer
         Call Refresher
         Call TimerMaxQuanBlink_Timer
 
-        MenuCtrlStart.Caption = "¡ð¡¡Start"
+        MenuVoteStart.Caption = "¡ð¡¡Start"
         LabelStatusBar.Caption = "Welcome! Press F5 to start voting, F6 to change quantity."
     End Sub
 
@@ -1009,7 +1006,7 @@ Public answer
 
     Public Sub Refresher()
         'REFRESH TOTALQUAN
-        MenuCtrlTotalQuan.Caption = "¡ù¡¡Quantity: " & totalquan
+        MenuVoteTotalQuan.Caption = "¡ù¡¡Quantity: " & totalquan
         CmdTotalQuan.Caption = totalquan
 
         LabelItemQuan1.Caption = itemquan1
@@ -1056,16 +1053,16 @@ Public answer
             currentquan = totalquan
             status = 0
 
-            MenuCtrlTotalQuan.Enabled = False
-            MenuCtrlStart.Caption = "¡ð¡¡Start"
-            MenuCtrlStart.Enabled = False
-            MenuCtrlVote1.Enabled = False
-            MenuCtrlVote2.Enabled = False
-            MenuCtrlVote3.Enabled = False
-            MenuCtrlVote4.Enabled = False
-            MenuCtrlVote5.Enabled = False
-            MenuCtrlVote6.Enabled = False
-            MenuCtrlClear.Enabled = True
+            MenuVoteTotalQuan.Enabled = False
+            MenuVoteStart.Caption = "¡ð¡¡Start"
+            MenuVoteStart.Enabled = False
+            MenuVoteVoteCand1.Enabled = False
+            MenuVoteVoteCand2.Enabled = False
+            MenuVoteVoteCand3.Enabled = False
+            MenuVoteVoteCand4.Enabled = False
+            MenuVoteVoteCand5.Enabled = False
+            MenuVoteVoteCand6.Enabled = False
+            MenuVoteClear.Enabled = True
             CmdTotalQuan.Enabled = False
             TextCommand.Enabled = False
             TextCommand.BackColor = &HAA7700
@@ -1108,23 +1105,23 @@ Public answer
 '[] COMMANDS []
 
     Public Sub CmdTotalQuan_Click()
-        Call MenuCtrlTotalQuan_Click
+        Call MenuVoteTotalQuan_Click
     End Sub
 
     Private Sub TextCommand_Change()
         Select Case TextCommand.Text
             Case "1"
-                Call MenuCtrlVote1_Click
+                Call MenuVoteVoteCand1_Click
             Case "2"
-                Call MenuCtrlVote2_Click
+                Call MenuVoteVoteCand2_Click
             Case "3"
-                Call MenuCtrlVote3_Click
+                Call MenuVoteVoteCand3_Click
             Case "4"
-                Call MenuCtrlVote4_Click
+                Call MenuVoteVoteCand4_Click
             Case "5"
-                Call MenuCtrlVote5_Click
+                Call MenuVoteVoteCand5_Click
             Case "6"
-                Call MenuCtrlVote6_Click
+                Call MenuVoteVoteCand6_Click
             Case ""
                 Call Refresher
             Case Else
@@ -1138,10 +1135,10 @@ Public answer
 '[] MENU []
 
     'CMD General...
-    Public Sub MenuCtrlEXIT_Click()
+    Public Sub MenuEXIT_Click()
         End
     End Sub
-    Public Sub MenuCtrlAbout_Click()
+    Public Sub MenuAbout_Click()
         FormAbout.Show
         FormAbout.Top = (Screen.Height / 2)
         FormAbout.Left = (Screen.Width / 2)
@@ -1154,7 +1151,7 @@ Public answer
     End Sub
 
     'CMD Controls...
-    Public Sub MenuCtrlTotalQuan_Click()
+    Public Sub MenuVoteTotalQuan_Click()
         FormInputNumber.currentinputnumber = 1
         FormInputNumber.LabelInputNumber1.Caption = ">"
         FormInputNumber.LabelInputNumber2.Caption = ">"
@@ -1171,22 +1168,22 @@ Public answer
         FormInputNumber.windowanimationtargetheight = 5895
     End Sub
 
-    Private Sub MenuCtrlStart_Click()
+    Private Sub MenuVoteStart_Click()
         Select Case status
             Case 0
                 status = 1
                 FormInputNumber.Hide
 
-                MenuCtrlTotalQuan.Enabled = False
-                MenuCtrlStart.Caption = "£¡¡¡Pause"
-                MenuCtrlStart.Enabled = True
-                MenuCtrlVote1.Enabled = True
-                MenuCtrlVote2.Enabled = True
-                MenuCtrlVote3.Enabled = True
-                MenuCtrlVote4.Enabled = True
-                MenuCtrlVote5.Enabled = True
-                MenuCtrlVote6.Enabled = True
-                MenuCtrlClear.Enabled = False
+                MenuVoteTotalQuan.Enabled = False
+                MenuVoteStart.Caption = "£¡¡¡Pause"
+                MenuVoteStart.Enabled = True
+                MenuVoteVoteCand1.Enabled = True
+                MenuVoteVoteCand2.Enabled = True
+                MenuVoteVoteCand3.Enabled = True
+                MenuVoteVoteCand4.Enabled = True
+                MenuVoteVoteCand5.Enabled = True
+                MenuVoteVoteCand6.Enabled = True
+                MenuVoteClear.Enabled = False
                 CmdTotalQuan.Enabled = False
                 TextCommand.Enabled = True
                 TextCommand.BackColor = &HFFCC55
@@ -1196,16 +1193,16 @@ Public answer
             Case 1
                 status = 0
 
-                MenuCtrlTotalQuan.Enabled = False
-                MenuCtrlStart.Caption = "¡ú¡¡Resume"
-                MenuCtrlStart.Enabled = True
-                MenuCtrlVote1.Enabled = False
-                MenuCtrlVote2.Enabled = False
-                MenuCtrlVote3.Enabled = False
-                MenuCtrlVote4.Enabled = False
-                MenuCtrlVote5.Enabled = False
-                MenuCtrlVote6.Enabled = False
-                MenuCtrlClear.Enabled = True
+                MenuVoteTotalQuan.Enabled = False
+                MenuVoteStart.Caption = "¡ú¡¡Resume"
+                MenuVoteStart.Enabled = True
+                MenuVoteVoteCand1.Enabled = False
+                MenuVoteVoteCand2.Enabled = False
+                MenuVoteVoteCand3.Enabled = False
+                MenuVoteVoteCand4.Enabled = False
+                MenuVoteVoteCand5.Enabled = False
+                MenuVoteVoteCand6.Enabled = False
+                MenuVoteClear.Enabled = True
                 CmdTotalQuan.Enabled = False
                 TextCommand.Enabled = False
                 TextCommand.BackColor = &HAA7700
@@ -1216,44 +1213,44 @@ Public answer
         Call Refresher
     End Sub
 
-    Public Sub MenuCtrlVote1_Click()
+    Public Sub MenuVoteVoteCand1_Click()
         itemquan1 = itemquan1 + 1
         currentquan = currentquan + 1
-        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote to Candidate 1 !"
+        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote for Candidate 1 !"
         Call Refresher
     End Sub
-    Public Sub MenuCtrlVote2_Click()
+    Public Sub MenuVoteVoteCand2_Click()
         itemquan2 = itemquan2 + 1
         currentquan = currentquan + 1
-        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote to Candidate 2 !"
+        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote for Candidate 2 !"
         Call Refresher
     End Sub
-    Public Sub MenuCtrlVote3_Click()
+    Public Sub MenuVoteVoteCand3_Click()
         itemquan3 = itemquan3 + 1
         currentquan = currentquan + 1
-        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote to Candidate 3 !"
+        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote for Candidate 3 !"
         Call Refresher
     End Sub
-    Public Sub MenuCtrlVote4_Click()
+    Public Sub MenuVoteVoteCand4_Click()
         itemquan4 = itemquan4 + 1
         currentquan = currentquan + 1
-        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote to Candidate 4 !"
+        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote for Candidate 4 !"
         Call Refresher
     End Sub
-    Public Sub MenuCtrlVote5_Click()
+    Public Sub MenuVoteVoteCand5_Click()
         itemquan5 = itemquan5 + 1
         currentquan = currentquan + 1
-        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote to Candidate 5 !"
+        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote for Candidate 5 !"
         Call Refresher
     End Sub
-    Public Sub MenuCtrlVote6_Click()
+    Public Sub MenuVoteVoteCand6_Click()
         itemquan6 = itemquan6 + 1
         currentquan = currentquan + 1
-        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote to Candidate 6 !"
+        LabelStatusBar.Caption = "Vote ongoing...¡¡" & currentquan & " / " & totalquan & "¡¡A new vote for Candidate 6 !"
         Call Refresher
     End Sub
 
-    Public Sub MenuCtrlClear_Click()
+    Public Sub MenuVoteClear_Click()
         currentquan = 1
         itemquan1 = 0
         itemquan2 = 0
@@ -1280,15 +1277,15 @@ Public answer
         maxquan = 0
         blinkorder = 1
 
-        MenuCtrlStart.Enabled = True
-        MenuCtrlTotalQuan.Enabled = True
-        MenuCtrlVote1.Enabled = False
-        MenuCtrlVote2.Enabled = False
-        MenuCtrlVote3.Enabled = False
-        MenuCtrlVote4.Enabled = False
-        MenuCtrlVote5.Enabled = False
-        MenuCtrlVote6.Enabled = False
-        MenuCtrlClear.Enabled = True
+        MenuVoteStart.Enabled = True
+        MenuVoteTotalQuan.Enabled = True
+        MenuVoteVoteCand1.Enabled = False
+        MenuVoteVoteCand2.Enabled = False
+        MenuVoteVoteCand3.Enabled = False
+        MenuVoteVoteCand4.Enabled = False
+        MenuVoteVoteCand5.Enabled = False
+        MenuVoteVoteCand6.Enabled = False
+        MenuVoteClear.Enabled = True
         CmdTotalQuan.Enabled = True
         TextCommand.Enabled = False
         TextCommand.BackColor = &HAA7700
@@ -1297,8 +1294,8 @@ Public answer
         Call Refresher
         Call TimerMaxQuanBlink_Timer
 
-        MenuCtrlTotalQuan.Caption = "¡ù¡¡Quantity: " & totalquan
-        MenuCtrlStart.Caption = "¡ð¡¡Start"
+        MenuVoteTotalQuan.Caption = "¡ù¡¡Quantity: " & totalquan
+        MenuVoteStart.Caption = "¡ð¡¡Start"
         LabelStatusBar.Caption = "Statistics cleared. Press F5 to start a new vote, F6 to change quantity."
     End Sub
 
